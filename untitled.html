@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Accordion Test</title>
+<link href="content/css/semantic.min.css" rel="stylesheet" type="text/css"/>
+<link href="css/style.css" rel="stylesheet" type="text/css"/>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="content/javascript/semantic.min.js"></script>
+
+    
+
+  </head>
+  <body>
+    <div style="display: block;" class="ui pointing menu">
+      <a class="item">
+        <i class="home icon"></i> Home
+      </a>
+      <a class="item">
+        <i class="mail icon"></i> Messages
+      </a>
+      <a class="item active">
+        <i class="user icon"></i> Friends
+      </a>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui icon input">
+            <input placeholder="Search..." type="text">
+            <i class="search link icon"></i>
+          </div>
+        </div>
+        <div class="ui dropdown item">
+          UserName <i class="dropdown icon"></i>
+          <div class="menu ui transition hidden">
+            <a class="item">Profile</a>
+            <a class="item">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="ui accordion">
+  <div class="active title">
+    <i class="dropdown icon"></i>
+    Events
+  </div>
+  <div class="active content">
+    <p><b>Event List</b></p>
+   </div>
+  <div class="title">
+    <i class="dropdown icon"></i>
+    Level 2
+  </div>
+  <div class="content">
+    <p>Welcome to level 2 where content is formatted without nested accordions</p>
+    </div>
+</div>
+
+  </body>
+
+  <script>
+    $(".ui.dropdown").dropdown();
+    $('.ui.accordion')
+  .accordion()
+;
+
+    $(document).ready(function() {
+      $('.menu a').click(function() {
+        var test = $('.menu a');
+        //document.write(test);
+        test.attr('class', 'item');
+        $(this).addClass('active');
+          console.log(test.next('a'));
+
+      });
+
+
+    });
+
+
+  </script>
+</html>
+
+
+
+
+
+

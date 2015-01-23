@@ -1,0 +1,215 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit
+END
+._widget
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._widget
+END
+._core
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._core
+END
+._tooltip
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._tooltip
+END
+all.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/all.html
+END
+subsuite.js
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/subsuite.js
+END
+._accordion
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._accordion
+END
+._menu
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._menu
+END
+._images
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._images
+END
+._draggable
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._draggable
+END
+._droppable
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._droppable
+END
+._sortable
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._sortable
+END
+._all.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._all.html
+END
+._datepicker
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._datepicker
+END
+._spinner
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._spinner
+END
+._resizable
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._resizable
+END
+._slider
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._slider
+END
+swarminject.js
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/swarminject.js
+END
+testsuite.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/testsuite.js
+END
+._qunit-composite.css
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._qunit-composite.css
+END
+._tabs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._tabs
+END
+._progressbar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._progressbar
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/index.html
+END
+qunit-composite.js
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/qunit-composite.js
+END
+._dialog
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._dialog
+END
+._autocomplete
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._autocomplete
+END
+._swarminject.js
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._swarminject.js
+END
+._selectable
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._selectable
+END
+._testsuite.js
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._testsuite.js
+END
+._position
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._position
+END
+._index.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._index.html
+END
+qunit-composite.css
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/qunit-composite.css
+END
+._qunit-composite.js
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._qunit-composite.js
+END
+._button
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._button
+END
+._subsuite.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._subsuite.js
+END
+._effects
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/csc309project/!svn/ver/23/jquery-ui-1.10.4/tests/unit/._effects
+END

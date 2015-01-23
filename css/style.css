@@ -1,0 +1,114 @@
+body {
+    font-size: 12px;
+}
+
+.ui.accordion {
+	margin-top:10px;
+	width: 99%;
+	font-size:12px;
+}
+
+.accordion.content {
+	max-height: 150px;
+	overflow-y:  scroll;
+}
+
+.ui.accordion .content, .ui.accordion .accordion .content {
+    display: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    border-radius: 0px;
+}
+
+.list-group-item {
+    background-color: #FFFFFF;
+    border:0px;
+    display: block;
+    margin-bottom: -1px;
+    padding: 10px 15px;
+    position: relative;
+}
+
+.mainContainer{
+	width:600px;
+	margin:0px;
+}
+
+.sideContainer {
+	width:200px;
+	margin-left: 10px;
+}
+
+.profilepic{
+	padding:0;
+}
+
+.jumbotron{
+	padding:10px 40px;
+	background-color:#FFFFFF;
+    width: 500px;
+}
+
+.ui.rating{
+	padding-left: 7px;
+}
+
+.list-group{
+	max-height: 150px;
+}
+
+.table td, .table th {
+	color: #000000;
+}
+
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+    background-color: #AAF3F7;
+    cursor: pointer;
+}
+
+
+.ui.popup {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.eventBody{
+	font-size: 17px; 
+	font-weight: 200; 
+	text-align: center 
+	overflow-y:auto;
+}
+
+.secondBox{
+	background-color: #000000;
+    background-size: cover;
+    border-radius: 6px;
+    box-shadow: 0 -5px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0.61;
+    left: 50%;
+    margin-left: -337px;
+    margin-top: -212px;
+    min-height: 405px;
+    padding-bottom: 20px;
+    position: absolute;
+    top: 50%;
+    width: 675px;
+    z-index: 1;
+}
+
+.innerText{
+	background-color: black;
+}
+
+.ui.popup {
+    
+    max-width: 469px;
+}
+
+
+

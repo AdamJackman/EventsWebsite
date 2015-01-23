@@ -1,0 +1,709 @@
+<?php
+
+class Functions {
+	public function showAllEvents($db){
+		$query = "SELECT * FROM actions";
+		$db->query($query);
+		$db->execute();
+		$res=$db->fetchAll();
+		return $res;
+	}
+
+	public function searchMyEvents($db, $eventName) {
+		// we have participants with events as we are given the memID 
+		$query = "SELECT eventName, description FROM participants NATURAL JOIN actions WHERE memberID=? AND eventName=?;";
+
+		$db->query($query);
+		$db->bind(1, $_SESSION["memberID"]); // Bind memberID to parameter.
+		$db->bind(2, $eventName); // Bind eventName to parameter.
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return $res;
+	}
+
+	public function myEvents($db, $email) {
+		$query = "SELECT eventName, startDate, endDate, description, location, coverpicture FROM participants NATURAL JOIN actions WHERE memberID =?;";
+
+		$db->query($query);
+		$db->bind(1, $_SESSION["memberID"]); // Bind memberID to parameter.
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return $res;
+	}
+
+	public function getEventDetails($db, $actionID) {
+		$query = "SELECT * FROM participants NATURAL JOIN actions WHERE memberID=? AND actionID=?;";
+
+		$db->query($query);
+		$db->bind(1, $_SESSION["memberID"]); // Bind memberID to parameter.
+		$db->bind(2, $actionID); // Bind memberID to parameter.
+		$db->execute();
+		$res=$db->fetchOne();
+
+		return $res;
+	}
+
+	public function getUpcomingEvents($db, $limit) {
+		$query = "SELECT * FROM participants NATURAL JOIN actions WHERE memberID=? AND current_date >= startDate AND current_date <= endDate LIMIT ?";
+
+		$db->query($query);
+		$db->bind(1, $_SESSION["memberID"]); // Bind memberID to parameter.
+		$db->bind(2, $limit);
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return $res;
+	}
+
+	public function search($db, $criteria){
+		//search for the eventName for a match.
+		//also allow for seaching of the tags.
+		$query = "SELECT eventName, description FROM actions WHERE eventname=?;";
+
+		$db->query($query);
+		$db->bind(1, $criteria); // Bind eventName to parameter.
+		$db->execute();
+		$res=$db->fetchAll();
+
+		$query2 = "SELECT eventName, description FROM actions NATURAL JOIN tags WHERE tagName=?;";
+		$db->query($query2);
+		$db->bind(1, $criteria); // Bind tag to parameter.
+		$db->execute();
+		$res2=$db->fetchAll();
+		//concat the results
+		$res3 = $res + $res2;
+
+		return $res3;
+	}
+
+	public function showMyRatings($db){
+		$query = "SELECT rating, comment FROM ratings NATURAL JOIN memberprofile WHERE memberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $_SESSION["memberID"]); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return $res;
+	}
+
+	public function showRatings($db, $memID){
+		$query = "SELECT rating, comment FROM ratings NATURAL JOIN memberprofile WHERE aboutMemberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $memID); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return $res;
+	}
+
+	public function showMyMember($db){
+		$query = "SELECT email, identity, age, gender, occupation FROM memberProfile WHERE memberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $_SESSION["memberID"]); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchOne();
+
+		return $res;
+	}
+
+	public function showActionDetails($db, $eName){
+		$query = "SELECT eventname, startdate, enddate, description, location, coverpicture FROM actions WHERE eventname=?;";
+
+		$db->query($query); 
+		$db->bind(1, $eName); // Bind the eventName
+		$db->execute();
+		$res=$db->fetchOne();
+
+		return $res;
+	}
+
+	public function showProfile($db, $memID){
+		$query = "SELECT email, identity, age, gender, occupation, profilepicture FROM memberProfile WHERE memberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $memID); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchOne();
+
+		return $res;	
+	}
+
+	public function averageRating($db, $memID){
+		$query = "SELECT rating FROM ratings WHERE aboutMemberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $memID); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchAll();
+		
+		//compute the average
+		$total = 0;
+		for ($i=0; $i < count($res) ; $i++) {
+			$total += $res[$i]['rating'];
+		}
+
+		// Make sure no division by 0
+		if (count($res)>0) {
+			$avgRating = $total / count($res);	
+		}
+		else{
+			$avgRating = 0;
+		}
+
+		return $avgRating;
+	}
+	
+	public function totalRating($db, $memID){
+		$query = "SELECT rating FROM ratings WHERE memberID=?;";
+
+		$db->query($query); 
+		$db->bind(1, $memID); // Bind the memberID
+		$db->execute();
+		$res=$db->fetchAll();
+
+		return count($res);
+	}
+
+
+	public function showMinAttend($db, $eName){
+		$query = "SELECT minattend FROM actions WHERE eventName=?;";
+
+		$db->query($query); 
+		$db->bind(1, $eName); // Bind the eventName
+		$db->execute();
+		$res=$db->fetchOne();
+
+		return $res;
+	}
+
+	//------------------ END REST OF MY FUNCTIONS -------------------------//
+
+//----------------------LIST OF FUNCTIONS2-----------------------------------//
+
+	public function getSessionID($db,$email){
+		$query="SELECT memberID FROM memberProfile WHERE email=?;";
+		$db->query($query);
+		$db->bind(1,$email);
+		$db->execute();
+		$res = $db->fetchOne();
+		$user_browser = $_SERVER['HTTP_USER_AGENT']; // Get the user-agent string of the user.
+
+        $memberID = preg_replace("/[^0-9]+/", "", $res["memberid"]); // XSS protection as we might print this value
+        $_SESSION['memberID']        = $memberID;
+        $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username); // XSS protection as we might print this value
+       // $_SESSION['username']       = $username;
+        //$_SESSION['login_string']   = hash('sha512', $db_password.$user_browser);
+		return $res;
+		
+	}
+
+	public function memberExists($db, $email){
+		$query="SELECT email FROM memberProfile WHERE email=?;";
+		$db->query($query);
+		$db->bind(1,$email);
+		$db->execute();
+		$res = $db->fetchOne();
+
+		
+		//return $res;
+		if (!empty($res)){
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	public function addMember($db, $email, $identity, $age, $gender, $occupation,$profilepicture, $memberlocation, $bio){
+		$res = self::memberExists($db, $email);
+		if ($res == 1){
+			return (1);
+		}
+		$query="INSERT INTO memberProfile(email,identity,age,gender,occupation,profilepicture,memberlocation,bio) VALUES(?,?,?,?,?,?,?,?);";
+		$db->query($query);
+		$db->bind(1,$email);
+		$db->bind(2,$identity);
+		$db->bind(3,$age);
+		$db->bind(4,$gender);
+		$db->bind(5,$occupation);
+		$db->bind(6,$profilepicture);
+		$db->bind(7,$memberlocation);
+		$db->bind(8,$bio);
+
+		$db->execute();
+
+		////$this->setSessionID($email);
+	}
+
+	public function removeMember($db, $email){
+		$query="DELETE FROM memberProfile WHERE email=?;";
+		$db->query($query);
+		$db->bind(1,$email);
+		$db->execute();
+
+	}
+
+	public function addParticipant($db,$eventName, $isOrganiser){
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$today = date("D M j G:i:s T Y"); 
+
+		$query = "INSERT INTO participants(memberID, actionID, dateJoined, isOrganiser) VALUES(?,?,?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$actionID["actionid"]);
+		$db->bind(3,$today);
+		$db->bind(4,$isOrganiser);
+		$db->execute();	
+	
+	}
+	
+	public function removeParticipantAdmin($db,$memberID,$eventName){
+
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$query="DELETE FROM participants WHERE memberID=? and actionID=?;";
+		$db->query($query);
+		$db->bind(1,$memberID);
+		$db->bind(2,$actionID["actionid"]);
+		$db->execute();
+
+	}
+
+	public function removeParticipantUser($db,$eventName){
+
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$query="DELETE FROM participants WHERE memberID=? and actionID=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$actionID["actionid"]);
+		$db->execute();
+	}
+
+	public function addTag($db,$eventName,$tagName){
+
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$query = "INSERT INTO tags(actionID,tagName) VALUES(?,?);";
+		$db->query($query);
+		$db->bind(1,$actionID["actionid"]);
+		$db->bind(2,$tagName);
+		$db->execute();
+	}
+
+	public function removeTag($db,$eventName, $tagName){
+
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$query="DELETE FROM tags WHERE actionID=? and tagName=?";
+		$db->query($query);
+		$db->bind(1,$actionID["actionid"]);
+		$db->bind(2,$tagName);
+		$db->execute();
+
+	}
+
+
+
+	public function addExpertise($db,$expertise){
+		$query="INSERT INTO expertise(memberID, expertise) VALUES(?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$expertise);
+		$db->execute();
+
+	}
+
+	public function removeExpertise($db){
+			$query="DELETE FROM expertise WHERE memberID=?;";
+			$db->query($query);
+			$db->bind(1,$_SESSION["memberID"]);
+			$db->execute();
+
+		}
+
+
+	public function removeEvent($db, $eventName){
+
+		$query = "SELECT actionID FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$actionID = $db->fetchOne();
+
+		$query="DELETE FROM actions WHERE actionID=?;";
+		$db->query($query);
+		$db->bind(1,$actionID["actionid"]);
+		$db->execute();
+
+	}
+
+	public function updateEvent($db, $actionID, $eventName, $startDate, $endDate, $description, $location, $coverPicture, $minimumMembers=5){
+ 		$query = "UPDATE actions SET(creatorid, eventname, startdate, enddate, description, location, coverpicture, minattend) = (?,?,?,?,?,?,?,?) WHERE actionID=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$eventName);
+		$db->bind(3,$startDate);
+		$db->bind(4,$endDate);
+		$db->bind(5,$description);
+		$db->bind(6,$location);
+		$db->bind(7,$coverPicture);
+		$db->bind(8,$minimumMembers);
+		$db->bind(9,$actionID);
+
+		$db->execute();	
+
+ 	}
+
+	public function addEvent($db, $eventName, $startDate, $endDate, $description, $location, $coverPicture, $minimumMembers=5){
+ 		
+ 		$query = "INSERT INTO actions(creatorid, eventname, startdate, enddate, description, location, coverpicture, minattend) VALUES(?,?,?,?,?,?,?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$eventName);
+		$db->bind(3,$startDate);
+		$db->bind(4,$endDate);
+		$db->bind(5,$description);
+		$db->bind(6,$location);
+		$db->bind(7,$coverPicture);
+		$db->bind(8,$minimumMembers);
+		$db->execute();	
+
+	}
+
+	public function mostRecent($db, $numOfEntries){
+		$query = "SELECT actionID,eventName,startDate,location FROM participants NATURAL JOIN actions WHERE memberID=? and current_date >= startDate AND current_date <= endDate  ORDER BY startDate LIMIT ?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$numOfEntries);
+		$db->execute();
+		$res = $db->fetchAll();
+		return ($res);
+	}
+
+	public function addRating($db, $memberID,$aboutMemberID, $rating, $comment=""){
+		$query="SELECT foo1.actionID FROM participants AS foo1 CROSS JOIN(SELECT actionID,memberID FROM participants) AS foo WHERE foo.memberID=? and foo1.memberID=? and foo1.actionID=foo.actionID;";
+		$db->query($query);
+		$db->bind(1,$memberID);
+		$db->bind(2,$aboutMemberID);
+		$db->execute();
+		$res = $db->fetchOne();
+		if (empty($res)){
+			return(1);
+		}
+
+
+		$query="INSERT INTO ratings(memberID, rating, comment, aboutMemberID) VALUES(?,?,?,?);";
+		$db->query($query);
+		$db->bind(1,$memberID);
+		$db->bind(2,$rating);
+		$db->bind(3,$comment);
+		$db->bind(4,$aboutMemberID);
+		$db->execute();
+	}
+
+
+	public function  occupiedDate ($db, $date){
+		$query = "SELECT * FROM actions NATURAL JOIN participants WHERE memberID=? and startDate<=? and endDate>=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$date);
+		$db->bind(3,$date);
+		$db->execute();
+		$res = $db->fetchOne();
+		return ($res);
+	}
+
+	
+
+	public function membersNeeded ($db, $eventName){
+
+		$query = "SELECT actionID,minattend FROM actions WHERE eventName=?;";
+		$db->query($query);
+		$db->bind(1,$eventName);
+		$db->execute();
+		$minattend = $db->fetchAll();
+		pr($minattend);
+
+
+		$query = "SELECT count(memberID) FROM participants WHERE actionID=? Group BY actionID;";
+		$db->query($query);
+		$db->bind(1,$minattend[0]["actionid"]);
+		$db->execute();
+		$numOfMembers = $db->fetchOne();
+		pr($numOfMembers);
+
+		if($minattend[0]["minattend"] - $numOfMembers["count"] <= 0){
+			return (0);
+		}else{
+			return($minattend[0]["minattend"] - $numOfMembers["count"]);
+		}
+
+	}
+
+
+	public function buildUserMatrix($db){
+		$query = "SELECT actionID FROM actions;";
+		$db->query($query);
+		$db->execute();
+		$numOfActions = $db->fetchAll();
+		
+		$query = "SELECT memberID FROM memberProfile;";
+		$db->query($query);
+		$db->execute();
+		$members = $db->fetchAll();
+		//return($members);
+		$array=array(array());
+
+
+		$finalArray = array();
+
+		echo "<table>";
+		echo "<tr>";
+		echo "<th>&nbsp;</th>";
+		
+		foreach($numOfActions as $key => $value) {
+			echo "<th>Event" . $value['actionid'] . "</th>";
+		}
+
+		echo "</tr>";
+		foreach ($members as $memberKey => $memberValue){
+			echo "<tr>";
+			echo "<td><b>" . $memberValue['memberid'] . "</b></td>";
+
+			foreach ($numOfActions as $actionKey => $actionValue){
+				$query = "SELECT memberID FROM participants WHERE memberID=? and actionID=?;";
+				$db->query($query);
+				$db->bind(1,$memberValue['memberid']);
+				$db->bind(2,$actionValue['actionid']);
+				$db->execute();
+				$memberitems=$db->fetchOne();
+				//pr($memberitems);
+				/*
+				pr($memberitems[0]['memberid']);
+				print($memberValue['memberid']);
+				return($memberitems);
+				*/
+
+				if (empty($memberitems)){
+					echo "<td>" . 0 . "</td>";
+					$answer = 0;
+				}else{
+					echo "<td>" . 1 . "</td>";
+					$answer = 1;
+				}
+
+				//Create double array
+				if (isset($finalArray[$memberValue['memberid']])) {
+					$finalArray[$memberValue['memberid']][$actionValue['actionid']] = $answer;
+				} else {
+					$finalArray[$memberValue['memberid']] = array($actionValue['actionid'] => $answer);
+				}
+
+				
+			}
+			echo "</tr>";
+		}
+		echo "</table>";
+		return ($finalArray);
+		/*
+		$array = array(array()); 
+		//return ($res);
+		for ($i=1; $i<=$numOfActions; $i++){
+
+		}
+*/		
+
+	}
+
+/*
+	public function calculateSimilarities($db, $matrix){
+		$array = array(array());
+		//return(count($matrix));
+		$count=count($matrix);
+		for ($i=0, $i<$count,$i++){
+			for ($j=0, $j<count($matrix[0]),$j++){
+				pr($j);
+			}
+
+		}		
+
+
+	} */
+
+
+
+	public function addFriend($db, $friendEmail){
+		$query = "SELECT memberID FROM memberProfile WHERE email=?;";
+		$db->query($query);
+		$db->bind(1,$friendEmail);
+		$db->execute();
+		$friendID = $db->fetchOne();
+
+		$query="INSERT INTO friends(friend1, friend2) VALUES(?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$friendID["memberid"]);
+		$db->execute();
+
+		$query="INSERT INTO friends(friend1, friend2) VALUES(?,?);";
+		$db->query($query);
+		$db->bind(1,$friendID["memberid"]);
+		$db->bind(2,$_SESSION["memberID"]);
+		$db->execute();
+
+
+	}
+
+	public function removeFriend($db, $friendEmail){
+		$query = "SELECT memberID FROM memberProfile WHERE email=?;";
+		$db->query($query);
+		$db->bind(1,$friendEmail);
+		$db->execute();
+		$friendID = $db->fetchOne();
+
+		$query="DELETE FROM friends WHERE friend1=? and friend2=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$friendID["memberid"]);
+		$db->execute();
+
+		$query="DELETE FROM friends WHERE friend1=? and friend2=?;";
+		$db->query($query);
+		$db->bind(1,$friendID["memberid"]);
+		$db->bind(2,$_SESSION["memberID"]);
+		$db->execute();
+
+	}
+
+	public function getFriends($db){
+		$query = "SELECT friend2 FROM friends WHERE friend1=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->execute();
+		$friendID = $db->fetchALL();
+		return($friendID);
+	}
+
+	public function getMemberFriends($db, $memberID){
+		$query = "SELECT friend2 FROM friends WHERE friend1=?;";
+		$db->query($query);
+		$db->bind(1,$memberID);
+		$db->execute();
+		$res = $db->fetchALL();
+		return($res);
+	}
+
+	public function getFriendsWithInfo($db, $memberID){
+		$query = "SELECT friend2 AS memberID FROM friends WHERE friend1=?";
+		$query2 = "SELECT identity, email, occupation, memberID, profilepicture FROM (" . $query . ") AS query NATURAL JOIN memberprofile;";
+
+		$db->query($query2);
+		$db->bind(1,$memberID);
+		$db->execute();
+		$res = $db->fetchALL();
+
+		return($res);
+
+	}
+
+	public function getUpcomingEvents2($db, $memberID){
+		$query = "SELECT eventname, location, startdate, description FROM actions NATURAL JOIN participants WHERE memberID=? ORDER BY startdate LIMIT 2;";
+
+		$db->query($query);
+		$db->bind(1,$memberID);
+		$db->execute();
+		$res = $db->fetchALL();
+		return($res);
+	}
+
+	public function getUpcomingForFriends($db, $memberID){
+		$friends = self::getMemberFriends($db, $memberID);
+
+		$eventList = array();
+
+		for ($i=0; $i < count($friends) ; $i++) {
+			$event = self::getUpcomingEvents2($db, $friends[$i]['friend2']);
+			foreach ($event as $key => $value) {
+				$eventList[] = $value;
+			}
+		}
+
+		foreach ($eventList as $key => $row) {
+    		$dates[$key]  = $row['startdate']; 
+  			// of course, replace 0 with whatever is the date field's index
+		}
+		//Make the output unique
+		array_multisort($dates, SORT_ASC, $eventList);
+
+		$res = array_unique($eventList);
+
+		$duplicates = array_diff_key( $eventList, $res );
+		return ($duplicates);
+	}
+
+
+	public function makeHangout($db,$actionID,$hangouturl){
+		$query="INSERT INTO hangout(creatorID, actionID, hangouturl) VALUES(?,?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$actionID);
+		$db->bind(3,$hangouturl);
+		$db->execute();
+	}
+
+	public function removeHangout($db,$actionID,$hangouturl){
+		$query="DELETE FROM hangout WHERE creatorID=? and actionID=? and hangouturl=?;";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$actionID);
+		$db->bind(3,$hangouturl);
+		$db->execute();
+	}
+
+	/*
+	public function Test($db, $eventName, $startDate, $endDate, $description, $location, $coverPicture, $occupation){
+ 		
+ 		$query = "INSERT INTO TestTable(creatorid, eventname, startdate, enddate, description, location, coverpicture, occupation) VALUES(?,?,?,?,?,?,?,?);";
+		$db->query($query);
+		$db->bind(1,$_SESSION["memberID"]);
+		$db->bind(2,$eventName);
+		$db->bind(3,$startDate);
+		$db->bind(4,$endDate);
+		$db->bind(5,$description);
+		$db->bind(6,$location);
+		$db->bind(7,$coverPicture);
+		$db->bind(8,$occupation);
+		$db->execute();	
+
+	}
+
+	*/
+
+}
+?>

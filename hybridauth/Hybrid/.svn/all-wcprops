@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid
+END
+Provider_Adapter.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Provider_Adapter.php
+END
+Provider_Model_OAuth1.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Provider_Model_OAuth1.php
+END
+Provider_Model_OAuth2.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Provider_Model_OAuth2.php
+END
+._Endpoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Endpoint.php
+END
+._index.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._index.html
+END
+._resources
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._resources
+END
+Storage.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Storage.php
+END
+._Providers
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Providers
+END
+._Provider_Adapter.php
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Provider_Adapter.php
+END
+._User_Activity.php
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._User_Activity.php
+END
+Provider_Model.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Provider_Model.php
+END
+User.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/User.php
+END
+Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Logger.php
+END
+._thirdparty
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._thirdparty
+END
+._Provider_Model_OpenID.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Provider_Model_OpenID.php
+END
+._Provider_Model.php
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Provider_Model.php
+END
+User_Contact.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/User_Contact.php
+END
+User_Activity.php
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/User_Activity.php
+END
+._User.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._User.php
+END
+._Logger.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Logger.php
+END
+User_Profile.php
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/User_Profile.php
+END
+Auth.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Auth.php
+END
+._Error.php
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Error.php
+END
+._User_Contact.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._User_Contact.php
+END
+Provider_Model_OpenID.php
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Provider_Model_OpenID.php
+END
+._Provider_Model_OAuth1.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Provider_Model_OAuth1.php
+END
+._Provider_Model_OAuth2.php
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Provider_Model_OAuth2.php
+END
+._User_Profile.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._User_Profile.php
+END
+._Auth.php
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Auth.php
+END
+Endpoint.php
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Endpoint.php
+END
+._Storage.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/._Storage.php
+END
+index.html
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/index.html
+END
+Error.php
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/csc309project/!svn/ver/64/hybridauth/Hybrid/Error.php
+END
